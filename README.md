@@ -1,5 +1,3 @@
-** Analysis of attributes in Door Dash wait time **
-
 Dataset: https://www.kaggle.com/datasets/dharun4772/doordash-eta-prediction
 Click the link to download
 
@@ -12,3 +10,7 @@ Then, we noticed that all our data was filled except that some observations had 
 to be `N/A`. So, we replaced all `NaN` values with `N/A` for feature `store_primary_category`.
 
 Besides that, there were no further preprocessing needed so we looked decided to do some data exploration and plot our data and the correspondance of the features.
+
+**Milestone 3 Updates:**
+
+We did more preprocessing, including min-max scaling our numerical data and removing outliers. After taking a look at our data, we found that there weren't any clear patterns between any numerical feature and `time_to_deliver`. However, for simplicity, we chose to start off with a linear regression model using `total_outstanding_orders` to predict `time_to_deliver`. Then, we compared our predictions to the ground truth for both training and testing and then inspecting our MSE.
