@@ -1,7 +1,5 @@
 # CSE 151A Group Project
 
-## Abstract
-
 ## Introduction
 Doordash is one of the most popular food delivery apps, allowing for a wide variety of choices on demand. Whether its a big catering event or whether its a really hungry individual, customers need accurate ETAs. Despite its popularity, DoorDash's ETA feature is sometimes unreliable. Motivated by this, in this project, our group decided to give ETA regression a try.
 
@@ -422,7 +420,11 @@ However, we wish that maybe we could've chosen a better dataset to do our projec
 
 ## Statement of Collaboration
 Eric Wang - Project Manager, Worked on data preprocessing, Model 3, Model 4, and the writeup.
+
 Sherif Elfiky - Data preprocessing, Model 1, reviewed everything
+
 Yudong Chen - Model 3, Model 4, reviewed everything
+
 Alexander Yang - Model 1, Model 2, reviewed everything
+
 Tianlin Zhao - Model 1, Model 2, reviewed everything
