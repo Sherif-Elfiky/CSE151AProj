@@ -1,11 +1,9 @@
 # CSE 151A Group Project
-***
+
 ## Abstract
-***
 
 ## Introduction
 Doordash is one of the most popular food delivery apps, allowing for a wide variety of choices on demand. Whether its a big catering event or whether its a really hungry individual, customers need accurate ETAs. Despite its popularity, DoorDash's ETA feature is sometimes unreliable. Motivated by this, in this project, our group decided to give ETA prediction a try.
-***
 
 ## Figures
 Figures 1.1, 1.2, and 1.3 all present the data in a visual way, helping us understand the relationships between certain features.
@@ -23,16 +21,11 @@ Heatmap showing the correlation between each feature. Greater values imply great
 ![image](https://github.com/user-attachments/assets/6240da21-5b30-443e-902e-91c6e3a46454)
 
 ## Methods
-***
 
 ## Results
-***
 
 ## Discussion
-***
 
 ## Conclusion
-***
 
 ## Statement of Collaboration
-***
