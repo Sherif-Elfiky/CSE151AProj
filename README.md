@@ -412,6 +412,13 @@ Running only three epochs was surprisingly fine since all the models seemed to c
 Our model had similar results to the baseline deep neural network, achieving similar mean squared error and also performing better on train than test. Given how this model was relatively much more complex than the baseline given the greater number of hidden layers and performed almost identical to the baseline, we reasoned that maybe the patterns in our loss might just be attributed to the randomness of the data. 
 
 ## Conclusion
+In the end, with our different models and methods even after pruning out our very extreme outliers, we couldn't seem to achieve good mean squared error. Our predictions ended up being very off, sometimes being almost up to an hour off. 
 
+We believe that maybe we couldn't accurately predict ETA given how many important factors we were missing. For example, the weather matters, the restaurant itself matters since it may have different procedures, maybe how crowded the restaurant is, etc. Therefore, even though these features on paper seem like the main deciders of what the ETA would be, any of the factors that were missing could change the ETA entirely. 
+
+Furthermore, even without taking these factors into account, our methods probably needed even greater complexity to predict the ETA. One idea that comes to mind is using ensemble methods that also take our potentially signficant categorical features that may affect the ETA into account like `store_primary_category`. Maybe some other methods that are more advanced that we haven't considered like transformers may be able to perform better.
+
+However, we wish that maybe we could've chosen a better dataset to do our project on given how dynamic DoorDash ETA can be. After some research on DoorDash's actual ETA predictor, they incorporate many components that we lack, utilizing complex probabilistic models to aide their data preprocessing and model performance.
 
 ## Statement of Collaboration
+
