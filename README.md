@@ -107,7 +107,7 @@ print('Training MSE: %.2f' % mean_squared_error(y_train, yhat_train))
 print('\nTesting MSE: %.2f' % mean_squared_error(y_test, yhat_test))
 ```
 
-### Model 2 - [Milestone 4](https://github.com/Sherif-Elfiky/CSE151AProj/blob/main/151AProject.ipynb)
+### Model 2 - [Milestone 3](https://github.com/Sherif-Elfiky/CSE151AProj/tree/milestone3/151AProject.ipynb)
 We then tried a more complex linear regression, using all other features besides `time_to_deliver` instead of just `estimated_store_to_consumer_driving_duration` to predict `time_to_deliver`. Accordingly, we had to redefine X to include all our features. We also kept the same 80:20 train/test split.
 ```
 X = numerical_data.drop(['time_to_deliver'], axis=1)
