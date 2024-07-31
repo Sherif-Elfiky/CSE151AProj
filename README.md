@@ -363,7 +363,20 @@ Finally, here's the loss while we evaluated our model on the testing set.
 
 ## Discussion
 ### Data Exploration and Preprocessing
+Initially, we were tempted to do a regression on `actual_delivery_time` since its a timestamp in UTC, matching the ETA DoorDash would provide. However, we realized that this wouldn't be very sustainable for not visualizing our data. Additionally, instead of being a simpler regression where a model outputs a single numerical value, the problem would be more complex outputting a specific timestamp. 
 
+So, we decided to create new feature `time_to_deliver` which represents the amount of seconds the order takes. To calculate this, we would need to subtract `created_at` from `actual_delivery_time` and then convert the resulting timestamp into a float.
+
+After that, we were able to visualize our data via a pairplot [Figure 1.1](#figure-1.1). Evaluating our data, we saw many outliers towards the larger side. This is likely due to extra large orders or special conditions that might affect some of our features. For example, if the dasher encountered a traffic accident, `estimated_store_to_consumer_driving_duration` would be abnormally high. So, to ensure we were able to regress on average cases, we got rid of abnormally high outliers. We decided when to cut our outliers off by eye.
+
+Additionally, we noticed that our categorical features wouldn't really affect ETA. Features like `market_id` and `store_id` are irrelevant to our goal. Although its true that some restuarants might take longer than others because of how they personally operate, we are limited by the fact that we wouldn't know which restaurants have a certain `store_id`. Other features like `order_protocol` and `estimated_order_place_duration` do have some impact, however, very very small. For instance, `estimated_order_place_duration` represents how long the store receives the order from DoorDash, which happens to not take long at all.
+
+In the end, we were left with our numerical features. From [Figure 1.1](#figure-1.1), we saw that some categories of `store_primary_category` were normally distributed but skewed from the massive outliers. However, this was not respresentative for all features. Therefore, we chose not to standardize our data and instead chose to min-max scale our data to make computation faster. 
+
+### Model 1
+After we preprocessed our data, we visualized our data again with another pairplot [Figure 1.2](#figure-1.2). Unable to find any clear correlations between the features and `time_to_deliver`, we generated a heatmap [Figure 1.3](#figure-1.3) plotting all the correlations between our features to see the numerical impact. Again, we weren't able to see any strong correlations with any of the features with `time_to_deliver`. 
+
+However, we chose to do a linear regression as a baseline model to 
 
 ## Conclusion
 
