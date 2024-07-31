@@ -40,7 +40,7 @@ Many observations were missing `store_primary_category`, looking at the dataset 
 data.fillna({'store_primary_category': 'N/A'})
 ```
 
-Our data had very extreme outliers towards the greater end for a most of our numerical features. So, we dropped those outliers. See [Figure 1.1](#figure-1.1) for pre-dropped data
+Our data had very extreme outliers towards the greater end for a most of our numerical features. So, we dropped those outliers. See [Figure 1.1](#figure-1.1) for pre-dropped data.
 ```
 data = data[data['time_to_deliver'] <= 6000]
 data = data[data['total_items'] <= 8]
@@ -57,7 +57,7 @@ dropped_columns = ['created_at', 'actual_delivery_time', 'store_primary_category
 numerical_data = data.drop(dropped_columns, axis=1)
 ```
 
-With just numerical features left, we min-max scaled our data except for `time_to_deliver`
+With just numerical features left, we min-max scaled our data except for `time_to_deliver`. See [Figure 1.2](#figure-1.2) for data after preprocessing.
 ```
 mms = MinMaxScaler()
 numerical_data = pd.DataFrame(mms.fit_transform(numerical_data), columns = numerical_data.columns)
@@ -65,9 +65,44 @@ numerical_data['time_to_deliver'] = data['time_to_deliver']
 ```
 
 ### Model 1 - [Milestone 3](https://github.com/Sherif-Elfiky/CSE151AProj/tree/milestone3/151AProject.ipynb)
+We began with a linear regression model using a single feature to predict `time_to_deliver` as a baseline model. After plotting the correlations between each feature and `time_to_deliver` on a heatmap (see [Figure 1.3](#figure-1.3)), we decided to use `estimated_store_to_consumer_driving_duration` to predict `time_to_deliver`.
 
+So, we made our X `estimated_store_to_consumer_driving_duration` and our y `time_to_deliver`. 
+```
+# we use estimated_store_to_consumer_driving_duration to predict time_to_deliver
+X = numerical_data['estimated_store_to_consumer_driving_duration']
+
+# we want to predict time_to_deliver
+y = numerical_data['time_to_deliver']
+```
+
+Then, we split our test/train 80:20.
+```
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+```
+
+Then, we used `LinearRegression` from sci-kit learn to generate our model. Mean squared error was our loss function.
+```
+reg = LinearRegression()
+regmodel = reg.fit(X_train.values.reshape(-1,1), y_train.values.reshape(-1,1))
+```
+
+To calculate mean squared error, we generated predictions for both train/test.
+```
+# get training predictions
+yhat_train = regmodel.predict(X_train.values.reshape(-1,1))
+# get testing predictions
+yhat_test = regmodel.predict(X_test.values.reshape(-1,1))
+```
+
+We were then able to see our mean squared error to evaluate how good our model did using the predictions we calculated.
+```
+print('Training MSE: %.2f' % mean_squared_error(y_train, yhat_train))
+print('\nTesting MSE: %.2f' % mean_squared_error(y_test, yhat_test))
+```
 
 ### Model 2 - [Milestone 3](https://github.com/Sherif-Elfiky/CSE151AProj/tree/milestone3/151AProject.ipynb)
+
 
 ### Model 3 - [Milestone 4](https://github.com/Sherif-Elfiky/CSE151AProj/blob/main/151AProject.ipynb)
 
