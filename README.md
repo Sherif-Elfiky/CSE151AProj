@@ -376,7 +376,34 @@ In the end, we were left with our numerical features. From [Figure 1.1](#figure-
 ### Model 1
 After we preprocessed our data, we visualized our data again with another pairplot [Figure 1.2](#figure-1.2). Unable to find any clear correlations between the features and `time_to_deliver`, we generated a heatmap [Figure 1.3](#figure-1.3) plotting all the correlations between our features to see the numerical impact. Again, we weren't able to see any strong correlations with any of the features with `time_to_deliver`. 
 
-However, we chose to do a linear regression as a baseline model to 
+However, we chose to do a linear regression as a baseline model. Out of all the features, `estimated_store_to_consumer_driving_duration` had the greatest correlation with `time_to_deliver`. Therefore, we chose `estimated_store_to_consumer_driving_duration` as our feature to predict `time_to_deliver`. 
+
+We ended up with a smaller testing MSE than training MSE, implying that our model underfit. This makes sense because according to [Figure 1.2](#figure-1.2), there isn't really a clear defined pattern between the two features. In other words, the data seems too scattered for a linear model to coherently fit it. Since we underfit, for our next model, we planned for it to be more complex in order to better fit the data. Additionally, since there weren't any clear patterns between any specific feature and `time_to_deliver`, we also thought that a model that would take in all of the features to predict `time_to_deliver` would have more information to work with to accurately predict.
+
+### Model 2
+Our first instinct was to try a linear regression but using all other features to predict `time_to_deliver`. 
+
+For this model, we again used mean squared error for our loss and `LinearRegression` from scikit-learn, which uses OLS to optimize our weights. 
+
+Our mean squared error for our train and our test sets did have similar values to those of the first model, falling into the 800000-900000 range. And again, our model produced greater training error than test, implying underfitting. 
+
+We did notice that this model performed better on the training set and worse on the test set than the previous, implying Model 2 is more fitted to the data than Model 1. This makes sense because we did increase the complexity for Model 2, incorporating all features this time.
+
+We thought that maybe this was a step in the right direction and thus decided our next model be something more complex.
+
+### Model 3
+For our third model, we chose a deep neural network. Since we didn't recognize any of the patterns in the data at all, we thought that maybe a neural network would be helpful to find some of the more complex patterns we couldn't decipher. 
+
+We used this model as a baseline model for our fourth since we didn't know how complex we needed the neural network needed to be. We arbitrarily chose an architechture consisting of two hidden layers and 32 nodes per hidden layer. For each layer, from experience and research, we found that ReLU generally performed the best and thus used it for each layer. To optimize speed while also prioritizing performance, we chose the Adam optimizer. 
+
+Again, since we didn't know how the model would perform, to be safe, we incorporated early stopping to help prevent potential overfitting. Most of the settings are the same as the default settings. Then, we fit our data with 10 epochs as a baseline. 
+
+We saw that our loss quickly converged to a similar value to those of the other two models after a single epoch. After we fit our data, we evaluated our model on the testing set and reported the loss. The testing loss was greater than our training loss, implying overfitting. However, its worth to note that there is a lot of randomness in the data and that the optimizer might have trouble actually finding better local minima as a result.
+
+Taking a look at our predictions, some are within five or so minutes of the ground truth, however, some are almost an hour. As this was a baseline deep neural network, we thought maybe our results would be different with some hyperparameter tuning.
+
+### Model 4
+
 
 ## Conclusion
 
