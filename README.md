@@ -398,13 +398,20 @@ We used this model as a baseline model for our fourth since we didn't know how c
 
 Again, since we didn't know how the model would perform, to be safe, we incorporated early stopping to help prevent potential overfitting. Most of the settings are the same as the default settings. Then, we fit our data with 10 epochs as a baseline. 
 
-We saw that our loss quickly converged to a similar value to those of the other two models after a single epoch. After we fit our data, we evaluated our model on the testing set and reported the loss. The testing loss was greater than our training loss, implying overfitting. However, its worth to note that there is a lot of randomness in the data and that the optimizer might have trouble actually finding better local minima as a result.
+We saw that our loss quickly converged to a similar value to those of the other two models after a single epoch. After we fit our data, we evaluated our model on the testing set and reported the loss. The testing loss was greater than our training loss, implying towards overfitting. However, its worth to note that there is a lot of randomness in the data and that the optimizer might have trouble actually finding better local minima as a result.
 
 Taking a look at our predictions, some are within five or so minutes of the ground truth, however, some are almost an hour. As this was a baseline deep neural network, we thought maybe our results would be different with some hyperparameter tuning.
 
 ### Model 4
+For our hyperparameter tuning, we ran a gridsearch with settings that were specialized to time. For example, we would only do one execution per trial. Additionally, we would only run three epochs per trial, however, its somewhat justified given the previous model's very early convergence. 
 
+For the hyperparameters we wanted to tune, we chose the number of hidden layers, nodes per layer, activation function, and learning rate. We wanted our number of hidden layers to be between two and four given and our number of nodes per layer to between 12 and 64 given how our previous model could have potentially shown signs of overfitting. Wanting to keep a ReLU type of activation function, we experimented ELU and Leaky ReLU since they were modified versions. 
+
+Running only three epochs was surprisingly fine since all the models seemed to converge early during the gridsearch. In the end, the model with the best performance was a deep neural network with four hidden layers, 32 nodes per layer, ELU for each activation, and a learning rate of 0.009.
+
+Our model had similar results to the baseline deep neural network, achieving similar mean squared error and also performing better on train than test. Given how this model was relatively much more complex than the baseline given the greater number of hidden layers and performed almost identical to the baseline, we reasoned that maybe the patterns in our loss might just be attributed to the randomness of the data. 
 
 ## Conclusion
+
 
 ## Statement of Collaboration
