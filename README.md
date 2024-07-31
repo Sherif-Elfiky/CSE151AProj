@@ -293,8 +293,8 @@ Epoch 9/10
 Epoch 10/10
 2194/2194 [==============================] - 4s 2ms/step - loss: 872971.5000
 ```
-Then, we plotted our loss per epoch to visualize what was happening with our loss over time.
-![image](https://github.com/user-attachments/assets/812d3757-7ff5-41a0-b8d7-5550b65f57e0)
+Then, we plotted our loss per epoch to visualize what was happening with our loss over time. Below is [Figure 1.4](#figure-1.4).
+![image](https://github.com/user-attachments/assets/e9ed2301-5183-4d90-83da-647edc6d1288)
 
 Finally, here's the loss while we evaluated our model on the testing set.
 ```
@@ -302,7 +302,64 @@ Finally, here's the loss while we evaluated our model on the testing set.
 865206.4375
 ```
 ### Model 4
+These are the top three models with the best loss performance after the gridsearch/
+```
+Results summary
+Results in ./untitled_project
+Showing 3 best trials
+Objective(name="loss", direction="min")
 
+Trial 0053 summary
+Hyperparameters:
+units: 32
+layers: 3
+activation: elu
+lr: 0.009000000000000001
+Score: 873135.9375
+
+Trial 0063 summary
+Hyperparameters:
+units: 64
+layers: 2
+activation: relu
+lr: 0.001
+Score: 873173.5
+
+Trial 0071 summary
+Hyperparameters:
+units: 64
+layers: 2
+activation: elu
+lr: 0.009000000000000001
+Score: 873274.8125
+```
+
+Of course, we took the best model `Trial 0053`. When we fit our model, we were able to output the loss per epoch. It is important to note that this model ran on the same early stopping settings, iterating through only seven epochs before stopping.
+```
+Epoch 1/10
+2194/2194 [==============================] - 17s 7ms/step - loss: 1391516.0000
+Epoch 2/10
+2194/2194 [==============================] - 13s 6ms/step - loss: 879407.1250
+Epoch 3/10
+2194/2194 [==============================] - 5s 2ms/step - loss: 875330.9375
+Epoch 4/10
+2194/2194 [==============================] - 7s 3ms/step - loss: 874432.1875
+Epoch 5/10
+2194/2194 [==============================] - 5s 2ms/step - loss: 874171.3125
+Epoch 6/10
+2194/2194 [==============================] - 6s 3ms/step - loss: 874147.3750
+Epoch 7/10
+2194/2194 [==============================] - 6s 3ms/step - loss: 874235.1250
+```
+
+Then, we plotted our loss per epoch to visualize what was happening with our loss over time. Below is [Figure 1.5](#figure-1.5).
+![image](https://github.com/user-attachments/assets/812d3757-7ff5-41a0-b8d7-5550b65f57e0)
+
+Finally, here's the loss while we evaluated our model on the testing set.
+```
+549/549 [==============================] - 1s 2ms/step - loss: 865334.6875
+865334.6875
+```
 
 ## Discussion
 ### Data Exploration and Preprocessing
