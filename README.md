@@ -421,4 +421,8 @@ Furthermore, even without taking these factors into account, our methods probabl
 However, we wish that maybe we could've chosen a better dataset to do our project on given how dynamic DoorDash ETA can be. After some research on DoorDash's actual ETA predictor, they incorporate many components that we lack, utilizing complex probabilistic models to aide their data preprocessing and model performance.
 
 ## Statement of Collaboration
-
+Eric Wang - Project Manager, Worked on data preprocessing, Model 3, Model 4, and the writeup.
+Sherif Elfiky - Data preprocessing, Model 1, reviewed everything
+Yudong Chen - Model 3, Model 4, reviewed everything
+Alexander Yang - Model 1, Model 2, reviewed everything
+Tianlin Zhao - Model 1, Model 2, reviewed everything
