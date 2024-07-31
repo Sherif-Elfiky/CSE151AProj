@@ -20,6 +20,13 @@ Pairplot after Data Preprocessing. Shows relationships between features and the 
 Heatmap showing the correlation between each feature. Greater values imply greater correlation.
 ![image](https://github.com/user-attachments/assets/6240da21-5b30-443e-902e-91c6e3a46454)
 
+### Figure 1.4
+Epoch vs. Training Loss plot for our baseline deep neural network.
+![image](https://github.com/user-attachments/assets/812d3757-7ff5-41a0-b8d7-5550b65f57e0)
+
+### Figure 1.5
+Epoch vs. Training Loss plot for our deep neural network with optimized hyperparameters.
+
 ## Methods
 Here are all the steps we took in our attempt of ETA regression. Here is the [dataset](https://www.kaggle.com/datasets/dharun4772/doordash-eta-prediction) we used.
 
@@ -76,18 +83,18 @@ X = numerical_data['estimated_store_to_consumer_driving_duration']
 y = numerical_data['time_to_deliver']
 ```
 
-Then, we split our test/train 80:20.
+Then, we split our train/test 80:20.
 ```
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 ```
 
-Then, we used `LinearRegression` from sci-kit learn to generate our model. Mean squared error was our loss function.
+Then, we used `LinearRegression` from sci-kit learn to generate our model. We then fit it on our training set.
 ```
 reg = LinearRegression()
 regmodel = reg.fit(X_train.values.reshape(-1,1), y_train.values.reshape(-1,1))
 ```
 
-To calculate mean squared error, we generated predictions for both train/test.
+We used mean squared error as our loss function. To calculate mean squared error, we generated predictions for both train/test.
 ```
 # get training predictions
 yhat_train = regmodel.predict(X_train.values.reshape(-1,1))
@@ -102,9 +109,68 @@ print('\nTesting MSE: %.2f' % mean_squared_error(y_test, yhat_test))
 ```
 
 ### Model 2 - [Milestone 3](https://github.com/Sherif-Elfiky/CSE151AProj/tree/milestone3/151AProject.ipynb)
+We then tried a more complex linear regression, using all other features besides `time_to_deliver` instead of just `estimated_store_to_consumer_driving_duration` to predict `time_to_deliver`. Accordingly, we had to redefine X to include all our features. We also kept the same 80:20 train/test split.
+```
+X = numerical_data.drop(['time_to_deliver'], axis=1)
+y = numerical_data['time_to_deliver']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+```
 
+From there, our code basically looked identical to the previous model. First, we defined our model using sci-kit learn's `LinearRegression` and fit it on the training set.
+```
+reg2 = LinearRegression()
+regmodel2 = reg2.fit(X_train, y_train)
+```
+
+Then, we generated our predictions for both the training and test sets to calculate our mean squared error for both sets.
+```
+yhat_train = regmodel2.predict(X_train)
+yhat_test = regmodel2.predict(X_test)
+```
+
+Finally, we reported our mean squared error.
+```
+print('Training MSE: %.2f' % mean_squared_error(y_train, yhat_train))
+print('\nTesting MSE: %.2f' % mean_squared_error(y_test, yhat_test))
+```
 
 ### Model 3 - [Milestone 4](https://github.com/Sherif-Elfiky/CSE151AProj/blob/main/151AProject.ipynb)
+Our third model was a dense neural network. This model served as a baseline neural network to compare with for our fourth. We used `Sequential` from keras for our model and each layer waas a `Dense` layer from keras. 
+
+For our baseline, we had two hidden layers with 32 nodes per hidden layer. Our activation for each layer was ReLU.
+```
+model = Sequential()
+model.add(Dense(units = 32, activation = 'relu', input_dim = X_train.shape[1]))
+model.add(Dense(units = 32, activation = 'relu'))
+model.add(Dense(units = 1, activation = 'relu'))
+```
+
+Our optimizer was Adam and we again used mean squared error for our loss function.
+```
+model.compile(optimizer = 'adam', loss = 'mean_squared_error')
+```
+
+Before we fit the model, we used early stopping settings to stop potential overfitting.
+```
+early_stopping = tf.keras.callbacks.EarlyStopping(
+    monitor='loss',
+    min_delta=0,
+    patience=1,
+    verbose=0,
+    mode='auto',
+    baseline=None,
+    restore_best_weights=False,
+    start_from_epoch=0
+)
+```
+
+We then fit our model using 10 epochs and our aforementioned early stopping settings.
+```
+history = model.fit(X_train, y_train, epochs = 10, verbose = 1, callbacks = [early_stopping])
+```
+
+
+
 
 ### Model 4 - [Milestone 4](https://github.com/Sherif-Elfiky/CSE151AProj/blob/main/151AProject.ipynb)
 
