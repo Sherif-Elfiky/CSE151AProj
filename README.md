@@ -40,7 +40,7 @@ Many observations were missing `store_primary_category`, looking at the dataset 
 data.fillna({'store_primary_category': 'N/A'})
 ```
 
-Our data had very extreme outliers towards the greater end for a most of our numerical features. So, we dropped those outliers. 
+Our data had very extreme outliers towards the greater end for a most of our numerical features. So, we dropped those outliers. See [Figure 1.1](#figure-1.1) for pre-dropped data
 ```
 data = data[data['time_to_deliver'] <= 6000]
 data = data[data['total_items'] <= 8]
