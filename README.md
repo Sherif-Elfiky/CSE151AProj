@@ -1,19 +1,38 @@
-Dataset: https://www.kaggle.com/datasets/dharun4772/doordash-eta-prediction
-Click the link to download
+# CSE 151A Group Project
+***
+## Abstract
+***
 
-**Data preprocessing:**
+## Introduction
+Doordash is one of the most popular food delivery apps, allowing for a wide variety of choices on demand. Whether its a big catering event or whether its a really hungry individual, customers need accurate ETAs. Despite its popularity, DoorDash's ETA feature is sometimes unreliable. Motivated by this, in this project, our group decided to give ETA prediction a try.
+***
 
-For the dataset we will add feature `time_to_deliver` - the time it takes for the order to be complete in a duration datetime timestamp. We will do regression on `time_to_deliver`.
-To do this, we had to first convert `actual_delivery_time` and `created_at` from strings to datetimes. Then, we subtracted `created_at` from `actual_delivery_time` to get `time_to_deliver`
+## Figures
+Figures 1.1, 1.2, and 1.3 all present the data in a visual way, helping us understand the relationships between certain features.
 
-Then, we noticed that all our data was filled except that some observations had `NaN` values for `store_primary_category`. Checking the dataset on kaggle, these `NaN` values were supposed 
-to be `N/A`. So, we replaced all `NaN` values with `N/A` for feature `store_primary_category`.
+### Figure 1.1:
+Pairplot showing the relationship between individual features with each other. The diagonal represents the distribution for each feature. Each observation is color-coded by `store_primary_category` - the type of food or service the resturant provides (e.g. Italian, Chinese, Fast Food)
+![image](https://github.com/user-attachments/assets/61f78eea-e4df-4488-80af-efdd535a857c)
 
-Besides that, there were no further preprocessing needed so we looked decided to do some data exploration and plot our data and the correspondance of the features.
+### Figure 1.2:
+Pairplot after Data Preprocessing. Shows relationships between features and the distribution for each feature after removing outliers and normalization. 
+![image](https://github.com/user-attachments/assets/11343030-fff4-494e-baa4-7da7640aab58)
 
-**Milestone 3 Updates:**
+### Figure 1.3
+Heatmap showing the correlation between each feature. Greater values imply greater correlation.
+![image](https://github.com/user-attachments/assets/6240da21-5b30-443e-902e-91c6e3a46454)
 
-We did more preprocessing, including min-max scaling our numerical data and removing outliers. After taking a look at our data, we found that there weren't any clear patterns between any numerical feature and `time_to_deliver`. However, for simplicity, we chose to start off with a linear regression model using `total_outstanding_orders` to predict `time_to_deliver`. Then, we compared our predictions to the ground truth for both training and testing and then inspecting our MSE.
+## Methods
+***
 
-**Conclusion:**
-We don't think there's anything we can do to improve a linear regression model since it already performs OLS to achieve the most optimal line. The MSE for both training and testing is very high and makes sense because all of the data is cluttered around in a non-linear fashion. But since the testing MSE is less than the training MSE, the model underfits.
+## Results
+***
+
+## Discussion
+***
+
+## Conclusion
+***
+
+## Statement of Collaboration
+***
